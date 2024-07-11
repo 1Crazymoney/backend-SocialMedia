@@ -1,0 +1,67 @@
+# 🌐 Social Network Backend System
+
+This project aims to develop the backend system for a social network application. The system allows users to register, log in, and access various features such as sending messages, following other users, and managing their profiles. Users can also make their profiles private, write comments on posts, and like posts. Additionally, the system provides the option to deactivate or delete user accounts.
+
+## 🛠️ Features
+
+The social network offers the following features:
+
+- **User Registration and Login**: Users can register and log in to access the application.
+- **Messaging**: Users can send and receive messages.
+- **Profile Management**: Users can update their profiles, set privacy settings, and view other users' profiles.
+- **Following Users**: Users can follow other users to see their posts in their timeline.
+- **Comments and Likes**: Users can comment on and like posts.
+- **Account Deactivation and Deletion**: Users can deactivate their accounts or request deletion by a super admin.
+
+## ⚙️ Stack
+
+<img alt="vsc" src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"> <img alt="mongodb" src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white"> <img alt="typescript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"> <img alt="jwt" src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white"> <img alt="express" src="https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white"> <img alt="nodejs" src="https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"> <img alt="npm" src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> <img alt="docker" src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white">
+
+## Local Installation
+
+1. Clone the repository from the URL
+2. `$ npm install`
+3. Connect the cloned repo with your MongoDB database
+4. Execute the migrations
+5. Execute the seeders
+6. `$ npm run dev` to start the server
+
+## Deploy 🚀
+
+----
+
+## 🗄️ Database Schema
+
+----
+
+## 🌐 Endpoints
+
+### 🔑 Authentication
+| Method | URI                    | Action           | Permissions | Body |
+|--------|------------------------|------------------|-------------|------|
+| POST   | /api/auth/register     | Register user    | Public      |      |
+| POST   | /api/auth/login        | Login user       | Public      |      |
+
+### 👥 Users
+| Method | URI                               | Action              | Permissions | Body |
+|--------|-----------------------------------|---------------------|-------------|------|
+| GET    | /api/users/profile                | View user profile   | User        |      |
+| PUT    | /api/users/profile/update         | Update user profile | User        |      |
+| GET    | /api/users                        | View users          | Superadmin  |      |
+| PUT    | /api/users/:id/role               | Update user role    | Superadmin  |      |
+| PUT    | /api/users/:id/follow             | Follow user         | User        |      |
+| PUT    | /api/users/deactivate             | Deactivate user     | User        |      |
+| PUT    | /api/users/superactivate/:id      | Reactivate user     | Superadmin  |      |
+| DELETE | /api/users/:id                    | Delete user         | Superadmin  |      |
+
+### 📝 Posts
+| Method | URI                              | Action                | Permissions | Body |
+|--------|----------------------------------|-----------------------|-------------|------|
+| POST   | /api/posts                       | Create post           | User        |      |
+| DELETE | /api/posts/:id                   | Delete post           | User        |      |
+| PUT    | /api/posts/:id                   | Update post           | User        |      |
+| GET    | /api/posts/own                   | Get own posts         | User        |      |
+| GET    | /api/posts                       | Get all posts         | Public      |      |
+| PUT    | /api/posts/like/:id              | Like post             | User        |      |
+| GET    | /api/posts/timeline              | Get timeline posts    | User        |      |
+| PUT    | /api/posts/comment/:id           | Add comment to post   | User        |      |
