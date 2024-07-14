@@ -5,7 +5,7 @@ import { dbConnection } from "./database/db.js";
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-//app.use(express.json());
+app.use(express.json());
 
 app.get("/healthy", (req, res) => {
   res.json({
@@ -14,8 +14,7 @@ app.get("/healthy", (req, res) => {
   });
 });
 
-//app.post('/games', createGame)
-//app.use("/api/v1", router); // Este será el prefijo, la routa será /games
+//app.use("/api/v1", router);
 
 dbConnection()
   .then(() => {
