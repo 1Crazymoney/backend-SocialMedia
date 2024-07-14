@@ -1,89 +1,77 @@
-import bcrypt from "bcrypt";
 import User from "./users.model.js";
-import jwt from "jsonwebtoken";
 
-export const register = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+//READ all users
+export const getAllUsers = async (req, res) => {
+	try {
+		//1. Obtener información
+		const users = await User.find({
+			select: {
+				email: true,
+			},
+		});
 
-    const hashedPassword = bcrypt.hashSync(
-      password,
-      parseInt(process.env.SALT_ROUNDS)
-    );
-
-    const newUser = await User.create({
-      email: email,
-      password: hashedPassword,
-    });
-
-    res.status(200).json({
-      success: true,
-      message: "User registered successfully",
-      data: newUser,
-    });
-  } catch (error) {
-    res.status(500).json({
-      succes: false,
-      message: "Error registering user",
-      error: error.message,
-    });
-  }
+		//2. Responder
+		res.status(200).json({
+			success: true,
+			message: 'Users retrived successfully',
+			data: users,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			message: 'Cannot show all users',
+			error: error,
+		});
+	}
 };
 
-export const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+//READ profile
+export const getUserProfile = async (req, res) => {
+	try {
+		//1. Obtener información
+		const userId = req.tokenData.id; //TODO ver cómo obtener info sin el tokenData ya que estamos en js
 
-    //validaciones
+		//2. Bucarlo en DB
 
-    if (!email || !password) {
-      return res.status(400).json({
-        succes: false,
-        message: "Email and password are required",
-      });
-    }
+		const user = await User.findOne({
+			where: { id: userId },
+		});
+		//2. Responder
+		res.status(200).json({
+			success: true,
+			message: 'Profile retrived successfully',
+			data: user,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			message: 'Cannot access to profile',
+			error: error,
+		});
+	}
+};
 
-    const user = await User.findOne({
-      email: email,
-    });
+//UPDATE
+export const updateUserProfile = async (req, res) => {
+	try {
+		//1. Obtener el id del usuario desde el token decodificado
+		const userIdToUpdate = req.tokenData.id; //TODO ver cómo obtener info sin el tokenData ya que estamos en js
+		const body = req.body;
 
-    if (!User) {
-      return res.status(404).json({
-        success: false,
-        message: "User or password invalid",
-      });
-    }
+		//4. Guardar la información en la DB
+		const userUpdated = await User.update({ id: userIdToUpdate }, body);
 
-    const isPasswordValid = bcrypt.compareSync(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(404).json({
-        success: false,
-        message: "User or password invalid",
-      });
-    }
-    const token = jwt.sign(
-      {
-        id: user._id,
-        email: user.email,
-        role: user.role,
-      },
-      process.env.JWT,
-      {
-        expiresIn: "2h",
-      }
-    );
-
-    console.log(user);
-    res.status(200).json({
-      success: true,
-      message: "User logged successfully",
-      data: token,
-    });
-  } catch (error) {
-    res.status(500).json({
-      succes: false,
-      message: "Error login user",
-      error: error.message,
-    });
-  }
+		//5. Responder
+		res.status(200).json({
+			success: true,
+			message: 'User updated successfully',
+			data: userUpdated,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			message: 'User cannot be updated',
+			error: error,
+		});
+	}
 };

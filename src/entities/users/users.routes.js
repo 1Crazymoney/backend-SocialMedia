@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { register, login } from './users.controller.js';
+import { getAllUsers, getUserProfile, updateUserProfile } from './users.controller.js';
 
 const router = Router()
 
-router.post('/register', register)
-router.post('/login', login)
+router.get('/', auth, isSuperAdmin, getAllUsers) //View all users (superadmin)
+router.get('/profile', auth, getUserProfile) //View users profile
+router.put('/profile', auth, updateUserProfile) //Update user profile
 
 export { router }

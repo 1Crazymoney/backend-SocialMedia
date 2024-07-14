@@ -37,31 +37,30 @@ The social network offers the following features:
 ## 🌐 Endpoints
 
 ### 🔑 Authentication
-| Method | URI                    | Action           | Permissions | Body |
+| Method | URI                    | Action           | Auth        | Body |
 |--------|------------------------|------------------|-------------|------|
-| POST   | /api/auth/register     | Register user    | Public      |      |
-| POST   | /api/auth/login        | Login user       | Public      |      |
+| POST   | /api/auth/register     | Register user    | N/A (public)|      |
+| POST   | /api/auth/login        | Login user       | N/A (public)|      |
 
 ### 👥 Users
-| Method | URI                               | Action              | Permissions | Body |
-|--------|-----------------------------------|---------------------|-------------|------|
-| GET    | /api/users/profile                | View user profile   | User        |      |
-| PUT    | /api/users/profile/update         | Update user profile | User        |      |
-| GET    | /api/users                        | View users          | Superadmin  |      |
-| PUT    | /api/users/:id/role               | Update user role    | Superadmin  |      |
-| PUT    | /api/users/:id/follow             | Follow user         | User        |      |
-| PUT    | /api/users/deactivate             | Deactivate user     | User        |      |
-| PUT    | /api/users/superactivate/:id      | Reactivate user     | Superadmin  |      |
-| DELETE | /api/users/:id                    | Delete user         | Superadmin  |      |
+| Method | URI                   | Action              | Auth                | Body |
+|--------|-----------------------|---------------------|---------------------|------|
+| GET    | /api/users            | View all users      | Token (superadmin)  |      |
+| GET    | /api/users/profile    | View user profile   | Token (user)        |      |
+| PUT    | /api/users/profile    | Update user profile | Token (user)        |      |
 
 ### 📝 Posts
-| Method | URI                              | Action                | Permissions | Body |
-|--------|----------------------------------|-----------------------|-------------|------|
-| POST   | /api/posts                       | Create post           | User        |      |
-| DELETE | /api/posts/:id                   | Delete post           | User        |      |
-| PUT    | /api/posts/:id                   | Update post           | User        |      |
-| GET    | /api/posts/own                   | Get own posts         | User        |      |
-| GET    | /api/posts                       | Get all posts         | Public      |      |
-| PUT    | /api/posts/like/:id              | Like post             | User        |      |
-| GET    | /api/posts/timeline              | Get timeline posts    | User        |      |
-| PUT    | /api/posts/comment/:id           | Add comment to post   | User        |      |
+| Method | URI                        | Action                | Auth        | Body |
+|--------|----------------------------|-----------------------|-------------|------|
+| POST   | /api/posts                 | Create post           | Token (user)|      |
+| DELETE | /api/posts/:id             | Delete post           | Token (user)|      |
+| PUT    | /api/posts                 | Update post           | Token (user)|      |
+| GET    | /api/posts/own             | Get own posts         | Token (user)|      |
+| GET    | /api/posts                 | Get all posts         | N/A (public)|      |
+| GET    | /api/posts/:id             | Get post by id        | N/A (public)|      |
+| GET    | /api/users/posts/:user_id  | Get posts by a user   | N/A (public)|      |
+
+### 📝 Like
+| Method | URI                        | Action                | Auth          | Body |
+|--------|----------------------------|-----------------------|---------------|------|
+| PUT    | /api/posts/like/:id        | Like and unlike post  | Token (user)  |      |
