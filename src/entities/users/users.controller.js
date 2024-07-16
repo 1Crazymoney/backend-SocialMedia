@@ -1,6 +1,6 @@
 import User from "./users.model.js";
 
-//READ all users
+//Get all users
 export const getAllUsers = async (req, res) => {
 	try {
 		//1. Obtener información
@@ -25,11 +25,11 @@ export const getAllUsers = async (req, res) => {
 	}
 };
 
-//READ profile
+//Get user profile
 export const getUserProfile = async (req, res) => {
 	try {
 		//1. Obtener información
-		const userId = req.tokenData.id; //TODO ver cómo obtener info sin el tokenData ya que estamos en js
+		const userId = req.tokenData.id;
 
 		//2. Bucarlo en DB
 
@@ -51,11 +51,11 @@ export const getUserProfile = async (req, res) => {
 	}
 };
 
-//UPDATE
+//Update User profile
 export const updateUserProfile = async (req, res) => {
 	try {
 		//1. Obtener el id del usuario desde el token decodificado
-		const userIdToUpdate = req.tokenData.id; //TODO ver cómo obtener info sin el tokenData ya que estamos en js
+		const userIdToUpdate = req.tokenData.id;
 		const body = req.body;
 
 		//4. Guardar la información en la DB
