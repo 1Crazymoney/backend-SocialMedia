@@ -31,10 +31,30 @@ export const createNewPost = async (req, res) => {
 //Delete post by id (params)
 export const deletePost = async (req, res) => {
 	try {
+		const postId = req.params.id;
+		const postToDeleteValid = Types.ObjectId.isValid(postId);
+	
+		const deletedPost = await Post.findByIdAndDelete(postId);
+		if (!deletedPost) {
+		  return res.status(404).json({
+			succes: false,
+			message: "Post not found",
+		  });
+		}
+		if (!postToDeleteValid) {
+		  res.status(400).json({
+			succes: false,
+			message: "Id not valid",
+		  });
+		}
+		res.status(200).json({
+		  success: true,
+		  message: "Post deleted successfully",
+		});
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: ' ',
+			message: 'Error deleting post',
 			error: error.message,
 		});
 	}
