@@ -63,10 +63,43 @@ export const deletePost = async (req, res) => {
 //Update post by id (body)
 export const updatePost = async (req, res) => {
 	try {
+		// 1. Get info
+		const postIdToUpdate = req.tokenData.id;
+		const { description, image } = req.body;
+		// 2. Validate information
+		const post = await Post.findOne({
+		  where: {
+			id: postIdToUpdate,
+		  },
+		});
+		if (!post) {
+		  return res.status(404).json({
+			success: false,
+			message: 'Post not found',
+		  });
+		}
+		// 3. Save in database
+		const updatedFields = {
+		  description: description,
+		  image: image,
+		};
+		await Post.update(
+		  {
+			id: postIdToUpdate,
+		  },
+		  updatedFields,
+		);
+		// 4. Response
+		res.status(200).json({
+		  success: true,
+		  message: 'Post updated successfully',
+		  data: updatedFields,
+		});
+		
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: ' ',
+			message: 'Error updating post',
 			error: error.message,
 		});
 	}

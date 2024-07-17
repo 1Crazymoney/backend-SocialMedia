@@ -54,24 +54,57 @@ export const getUserProfile = async (req, res) => {
 //Update User profile
 export const updateUserProfile = async (req, res) => {
 	try {
-		//1. Obtener el id del usuario desde el token decodificado
+		// 1. Get info
 		const userIdToUpdate = req.tokenData.id;
-		const body = req.body;
-
-		//4. Guardar la información en la DB
-		const userUpdated = await User.update({ id: userIdToUpdate }, body);
-
-		//5. Responder
-		res.status(200).json({
-			success: true,
-			message: 'User updated successfully',
-			data: userUpdated,
+		const { first_name, last_name, email, password_hash } = req.body;
+		let newPassword;
+		// 2. Validate information
+		const user = await User.findOne({
+		  where: {
+			id: userIdToUpdate,
+		  },
 		});
-	} catch (error) {
-		res.status(500).json({
+		if (!user) {
+		  return res.status(404).json({
 			success: false,
-			message: 'User cannot be updated',
-			error: error,
+			message: 'User not found',
+		  });
+		}
+		// 3. Process information
+		if (password_hash) {
+		  if (password_hash.length < 8 || password_hash.length > 12) {
+			return res.status(400).json({
+			  success: false,
+			  message:
+				'Password is not valid, 8 to 12 characters must be needed, try again',
+			});
+		  }
+		  newPassword = bcrypt.hashSync(password_hash, 10);
+		}
+		// 4. Save in database
+		const updatedFields = {
+		  first_name: first_name,
+		  last_name: last_name,
+		  email: email,
+		  password_hash: newPassword,
+		};
+		await User.update(
+		  {
+			id: userIdToUpdate,
+		  },
+		  updatedFields,
+		);
+		// 5. Response
+		res.status(200).json({
+		  success: true,
+		  message: 'User updated successfully',
+		  data: updatedFields,
 		});
-	}
-};
+	  } catch (error) {
+		res.status(500).json({
+		  success: false,
+		  message: 'User cannot be updated',
+		  error: error,
+		});
+	  }
+	};
