@@ -39,8 +39,10 @@ The social network offers the following features:
 ### 🔑 Authentication
 | Method | URI                    | Action           | Auth        | Body |
 |--------|------------------------|------------------|-------------|------|
-| POST   | /api/auth/register     | Register user    | N/A (public)|      |
-| POST   | /api/auth/login        | Login user       | N/A (public)|      |
+| POST   | /api/auth/register     | Register user    | N/A (public)|{ "email": "youremail@email.com",
+"password": "yourPassword" }    |
+| POST   | /api/auth/login        | Login user       | N/A (public)|{ "email": "youremail@email.com",
+"password": "yourPassword" }      |
 
 ### 👥 Users
 | Method | URI                   | Action              | Auth                | Body |
