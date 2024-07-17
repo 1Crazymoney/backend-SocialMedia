@@ -1,5 +1,6 @@
-import express from 'express';
+import express, { Router } from 'express';
 import 'dotenv/config';
+import { router } from "./router.js"
 import { dbConnection } from "./database/db.js";
 
 const app = express();
@@ -14,7 +15,7 @@ app.get("/healthy", (req, res) => {
   });
 });
 
-//app.use("/api/v1", router);
+app.use("/api", router);
 
 dbConnection()
   .then(() => {
