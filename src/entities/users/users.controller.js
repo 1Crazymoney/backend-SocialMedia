@@ -1,42 +1,36 @@
-import User from "./users.model.js";
+import User from './users.model.js'
 
-//Get all users
+// Get all users
 export const getAllUsers = async (req, res) => {
 	try {
-		//1. Obtener información
-		const users = await User.find({
-			select: {
-				email: true,
-			},
-		});
-
-		//2. Responder
-		res.status(200).json({
-			success: true,
-			message: 'Users retrived successfully',
-			data: users,
-		});
+	  const users = await User.find().select("email role");
+	  res.status(200).json({
+		success: true,
+		message: "Users retrieved successfully",
+		data: users,
+	  });
 	} catch (error) {
-		res.status(500).json({
-			success: false,
-			message: 'Cannot show all users',
-			error: error,
-		});
+	  console.error('Get all users error:', error);
+	  res.status(500).json({
+		success: false,
+		message: "Cannot retrieve users",
+		error: error.message,
+	  });
 	}
-};
+  };
 
 //Get user profile
 export const getUserProfile = async (req, res) => {
 	try {
-		//1. Obtener información
+		//1. Get information
 		const userId = req.tokenData.id;
 
-		//2. Bucarlo en DB
+		//2. Find in database
 
 		const user = await User.findOne({
 			where: { id: userId },
 		});
-		//2. Responder
+		//2. Response
 		res.status(200).json({
 			success: true,
 			message: 'Profile retrived successfully',
@@ -54,7 +48,7 @@ export const getUserProfile = async (req, res) => {
 //Update User profile
 export const updateUserProfile = async (req, res) => {
 	try {
-		// 1. Get info
+		// 1. Get information
 		const userIdToUpdate = req.tokenData.id;
 		const { first_name, last_name, email, password_hash } = req.body;
 		let newPassword;

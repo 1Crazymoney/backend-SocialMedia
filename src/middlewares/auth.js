@@ -1,32 +1,29 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import User from '../entities/users/users.model.js';
 
-export const auth = (req, res, next) => {
-  try {
-    if(!req.headers.authorization) {
-      return res.status(401).json(
-        {
-          suucess: false,
-          message: "Unauthorized"
-        }
-      )
-    }
+export const auth = async (req, res, next) => {
+	try {
+		const token = req.headers.authorization?.split(' ')[1];
 
-    const token = req.headers.authorization.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);    
+		if (!token) {
+			return res.status(401).json({
+				success: false,
+				message: 'Unauthorized access',
+			});
+		}
 
-    req.tokenData = {
-      id: decoded.id,
-      role: decoded.role
-    }
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    next();
-  } catch (error) {
-    res.status(500).json(
-      {
-        success: false,
-        message: "Error authenticadd",
-        error: error
-      }
-    )
-  }
-}
+		req.tokenData = {
+			userId: decoded.userId,
+			role: decoded.role,
+		};
+		next();
+	} catch (error) {
+		return res.status(401).json({
+			success: false,
+			message: 'Unauthorized',
+			error: error.message,
+		});
+	}
+};
