@@ -23,13 +23,11 @@ export const getAllUsers = async (req, res) => {
 export const getUserProfile = async (req, res) => {
 	try {
 		//1. Get information
-		const userId = req.tokenData.id;
+		const userId = req.tokenData.userId;
 
 		//2. Find in database
 
-		const user = await User.findOne({
-			where: { id: userId },
-		});
+		const user = await User.findOne({ _id: userId }).select("firsta_name last_name nickname email -_id");
 		//2. Response
 		res.status(200).json({
 			success: true,
