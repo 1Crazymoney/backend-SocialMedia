@@ -38,7 +38,7 @@ The social network offers the following features:
 
 ### 🔑 Authentication
 | Method | URI                    | Action           | Auth        | Body |
-|--------|------------------------|------------------|-------------|------|
+|:--------:|:------------------------:|:------------------:|:-------------:|:------:|
 | POST   | /api/auth/register     | Register user    | N/A (public)|{ "email": "youremail@email.com",
 "password": "yourPassword" }    |
 | POST   | /api/auth/login        | Login user       | N/A (public)|{ "email": "youremail@email.com",
@@ -46,23 +46,24 @@ The social network offers the following features:
 
 ### 👥 Users
 | Method | URI                   | Action              | Auth                | Body |
-|--------|-----------------------|---------------------|---------------------|------|
-| GET    | /api/users            | View all users      | Token (superadmin)  |      |
-| GET    | /api/users/profile    | View user profile   | Token (user)        |      |
-| PUT    | /api/users/profile    | Update user profile | Token (user)        |      |
+|:--------:|:-----------------------:|:---------------------:|:---------------------:|:------:|
+| GET    | /api/users            | View all users      | Token (superadmin)  |   N/A   |
+| GET    | /api/users/profile    | View user profile   | Token (user)        |   N/A   |
+| PUT    | /api/users/profile    | Update user profile | Token (user)        |   {"first_name": "newFirstName",
+"last_name_ "newLastName", "nickname": "newNickName", "email": "newEmail", "password": "newPassword"}   |
 
 ### 📝 Posts
 | Method | URI                        | Action                | Auth        | Body |
-|--------|----------------------------|-----------------------|-------------|------|
-| POST   | /api/posts                 | Create post           | Token (user)|      |
-| DELETE | /api/posts/:id             | Delete post           | Token (user)|      |
-| PUT    | /api/posts                 | Update post           | Token (user)|      |
-| GET    | /api/posts/own             | Get own posts         | Token (user)|      |
-| GET    | /api/posts                 | Get all posts         | N/A (public)|      |
-| GET    | /api/posts/:id             | Get post by id        | N/A (public)|      |
-| GET    | /api/users/posts/:user_id  | Get posts by a user   | N/A (public)|      |
+|:--------:|:----------------------------:|:-----------------------:|:-------------:|:------:|
+| POST   | /api/posts                 | Create post           | Token (user)|{ "description": "description, "image": "URL_image"}      |
+| DELETE | /api/posts/:id             | Delete post           | Token (user)|   N/A   |
+| PUT    | /api/posts                 | Update post           | Token (user)|{ "postId": "postIdToUpdate", "description": "newDescription, "image": "newURL_image"}      |
+| GET    | /api/posts/own             | Get own posts         | Token (user)|   N/A   |
+| GET    | /api/posts                 | Get all posts         | N/A (public)|   N/A   |
+| GET    | /api/posts/:id             | Get post by id        | N/A (public)|  N/A     |
+| GET    | /api/users/posts/:user_id  | Get posts by a user   | N/A (public)|  N/A     |
 
 ### 📝 Like
 | Method | URI                        | Action                | Auth          | Body |
-|--------|----------------------------|-----------------------|---------------|------|
+|:--------:|:----------------------------:|:-----------------------:|:---------------:|:------:|
 | PUT    | /api/posts/like/:id        | Like and unlike post  | Token (user)  |      |

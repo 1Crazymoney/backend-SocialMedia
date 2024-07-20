@@ -29,7 +29,7 @@ export const getUserProfile = async (req, res) => {
 		//2. Find in database
 
 		const user = await User.findOne({ _id: userId }).select(
-			'firsta_name last_name nickname email -_id',
+			'first_name last_name nickname email -_id',
 		);
 		//2. Response
 		res.status(200).json({

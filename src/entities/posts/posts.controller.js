@@ -1,25 +1,41 @@
+import { Types } from 'mongoose';
 import Post from './posts.model.js';
 import User from '../users/users.model.js';
 
 //Create new post
 export const createNewPost = async (req, res) => {
 	try {
-		const description = req.body.description;
-		const image = req.body.image;
-		const user = req.tokenData.userId;
-
+		const { description, image } = req.body;
+		const userId = req.tokenData.userId;
+		if (!description) {
+			console.log(2);
+			throw new Error('Description is required');
+		}
 		const newPost = await Post.create({
+			user: userId,
 			description: description,
 			image: image,
-			user: user,
 		});
-
+		const user = await User.findById(userId);
+		if (!user) {
+			throw new Error('User not found');
+		}
 		res.status(201).json({
 			success: true,
 			message: 'New post created succesfully',
-			data: newPost,
+			data: {
+				userEmail: user.email,
+				post: newPost,
+			},
 		});
 	} catch (error) {
+		if (error.message == 'Description is required') {
+			return res.status(400).json({
+				success: false,
+				message: 'Title and description are required',
+				error: error.message,
+			});
+		}
 		res.status(500).json({
 			success: false,
 			message: 'Error creating post',
@@ -33,23 +49,23 @@ export const deletePost = async (req, res) => {
 	try {
 		const postId = req.params.id;
 		const postToDeleteValid = Types.ObjectId.isValid(postId);
-	
+
 		const deletedPost = await Post.findByIdAndDelete(postId);
 		if (!deletedPost) {
-		  return res.status(404).json({
-			succes: false,
-			message: "Post not found",
-		  });
+			return res.status(404).json({
+				succes: false,
+				message: 'Post not found',
+			});
 		}
 		if (!postToDeleteValid) {
-		  res.status(400).json({
-			succes: false,
-			message: "Id not valid",
-		  });
+			res.status(400).json({
+				succes: false,
+				message: 'Id not valid',
+			});
 		}
 		res.status(200).json({
-		  success: true,
-		  message: "Post deleted successfully",
+			success: true,
+			message: 'Post deleted successfully',
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -63,40 +79,55 @@ export const deletePost = async (req, res) => {
 //Update post by id (body)
 export const updatePost = async (req, res) => {
 	try {
-		// 1. Get info
-		const postIdToUpdate = req.tokenData.id;
-		const { description, image } = req.body;
+		// 1. Get information
+		const userId = req.tokenData.userId;
+		const { postId, description, image } = req.body;
+
 		// 2. Validate information
+		if (!postId) {
+			throw new Error('postId is required');
+		}
+		if (!userId) {
+			return res.status(404).json({
+				success: false,
+				message: 'User not found',
+			});
+		}
 		const post = await Post.findOne({
-		  where: {
-			id: postIdToUpdate,
-		  },
+			_id: postId,
+			user: userId,
 		});
 		if (!post) {
-		  return res.status(404).json({
-			success: false,
-			message: 'Post not found',
-		  });
+			return res.status(404).json({
+				success: false,
+				message: 'Post not found',
+			});
 		}
+
 		// 3. Save in database
-		const updatedFields = {
-		  description: description,
-		  image: image,
-		};
-		await Post.update(
-		  {
-			id: postIdToUpdate,
-		  },
-		  updatedFields,
-		);
+		if (description) {
+			post.description = description;
+		}
+		if (image) {
+			post.image = image;
+		}
+
+		await post.save();
+
 		// 4. Response
 		res.status(200).json({
-		  success: true,
-		  message: 'Post updated successfully',
-		  data: updatedFields,
+			success: true,
+			message: 'Post updated successfully',
+			data: post,
 		});
-		
 	} catch (error) {
+		if (error.message === 'postId is required') {
+			return res.status(400).json({
+				success: false,
+				message: 'postId is required',
+				error: error.message,
+			});
+		}
 		res.status(500).json({
 			success: false,
 			message: 'Error updating post',
@@ -108,10 +139,40 @@ export const updatePost = async (req, res) => {
 //Get my own posts
 export const getMyPosts = async (req, res) => {
 	try {
+		//1. Get information
+		const userId = req.tokenData.userId;
+		//2. Find in database
+		const myPosts = await Post.find({ user: userId })
+		//3. Validate information
+		if(!userId){
+			res.status(404).json(
+				{
+					success: false,
+					message: 'User not found'
+				}
+			)
+		}
+		if(!myPosts){
+			res.status(404).json(
+				{
+					success: false,
+					message: "You don't have any posts yet"
+				}
+			)
+		}
+		//4. response
+		res.status(200).json(
+			{
+				succes: true,
+				message: 'All your posts retrieved successfully',
+				data: myPosts
+			}
+		)
+
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: ' ',
+			message: 'Error retrieving your posts',
 			error: error.message,
 		});
 	}
