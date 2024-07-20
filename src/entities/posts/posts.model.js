@@ -15,11 +15,11 @@ const PostSchema = new Schema(
 			ref: 'User',
 			required: true,
 		},
-		like: {
+		like: [{
 			type: Schema.Types.ObjectId,
 			ref: 'User',
 			required: false,
-		},
+		}],
 	},
 	{
 		timestamps: true,

@@ -143,33 +143,26 @@ export const getMyPosts = async (req, res) => {
 		//1. Get information
 		const userId = req.tokenData.userId;
 		//2. Find in database
-		const myPosts = await Post.find({ user: userId })
+		const myPosts = await Post.find({ user: userId });
 		//3. Validate information
-		if(!userId){
-			res.status(404).json(
-				{
-					success: false,
-					message: 'User not found'
-				}
-			)
+		if (!userId) {
+			res.status(404).json({
+				success: false,
+				message: 'User not found',
+			});
 		}
-		if(!myPosts){
-			res.status(404).json(
-				{
-					success: false,
-					message: "You don't have any posts yet"
-				}
-			)
+		if (!myPosts) {
+			res.status(404).json({
+				success: false,
+				message: "You don't have any posts yet",
+			});
 		}
 		//4. Response
-		res.status(200).json(
-			{
-				succes: true,
-				message: 'All your posts retrieved successfully',
-				data: myPosts
-			}
-		)
-
+		res.status(200).json({
+			succes: true,
+			message: 'All your posts retrieved successfully',
+			data: myPosts,
+		});
 	} catch (error) {
 		res.status(500).json({
 			success: false,
@@ -183,17 +176,14 @@ export const getMyPosts = async (req, res) => {
 export const getAllPosts = async (req, res) => {
 	try {
 		//1. Get information
-		const allPosts = await Post.find()
+		const allPosts = await Post.find();
 
 		//2. Response
-		res.status(200).json(
-			{
-				succes: true,
-				message: 'All posts retrieved successfully',
-				data: allPosts
-			}
-		)
-
+		res.status(200).json({
+			succes: true,
+			message: 'All posts retrieved successfully',
+			data: allPosts,
+		});
 	} catch (error) {
 		res.status(500).json({
 			success: false,
@@ -211,13 +201,11 @@ export const getPostById = async (req, res) => {
 
 		//2. Validate information
 		const idPostValid = Types.ObjectId.isValid(postId);
-		if (!idPostValid){
-			res.status(400).json(
-				{
-					succes: false,
-					message: 'Id post is not valid'
-				}
-			)
+		if (!idPostValid) {
+			res.status(400).json({
+				succes: false,
+				message: 'Id post is not valid',
+			});
 		}
 		//3. Find in database
 		const post = await Post.findOne({
@@ -225,14 +213,11 @@ export const getPostById = async (req, res) => {
 		});
 
 		//4. Response
-		res.status(200).json(
-			{
-				succes: true,
-				message: 'Post retrieved successfully',
-				data: post
-			}
-		)
-
+		res.status(200).json({
+			succes: true,
+			message: 'Post retrieved successfully',
+			data: post,
+		});
 	} catch (error) {
 		res.status(500).json({
 			success: false,
@@ -243,7 +228,7 @@ export const getPostById = async (req, res) => {
 };
 
 //Get post by user (params)
-export const getPostByUser = async (req, res) => {
+export const getPostsByUser = async (req, res) => {
 	try {
 		// 1. Get information
 		const userId = req.params.user_id;
@@ -252,14 +237,14 @@ export const getPostByUser = async (req, res) => {
 		if (!userId) {
 			return res.status(400).json({
 				success: false,
-				message: 'User id is required'
+				message: 'User id is required',
 			});
 		}
-		const userValid = mongoose.Types.ObjectId.isValid(userId)
+		const userValid = mongoose.Types.ObjectId.isValid(userId);
 		if (!userValid) {
 			return res.status(400).json({
 				success: false,
-				message: 'Invalid user id'
+				message: 'Invalid user id',
 			});
 		}
 
@@ -269,7 +254,7 @@ export const getPostByUser = async (req, res) => {
 		if (userPosts.length === 0) {
 			return res.status(404).json({
 				success: false,
-				message: 'No posts found for this user'
+				message: 'No posts found for this user',
 			});
 		}
 
@@ -277,7 +262,7 @@ export const getPostByUser = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			message: 'User posts retrieved successfully',
-			data: userPosts
+			data: userPosts,
 		});
 	} catch (error) {
 		return res.status(500).json({
@@ -288,13 +273,44 @@ export const getPostByUser = async (req, res) => {
 	}
 };
 
-//Like and dislike
+//Like and dislike by post id (params)
 export const likeOrNot = async (req, res) => {
 	try {
+		//1. Get information
+		const postId = req.params.id;
+		const userId = req.tokenData.userId;
+		//2. Find in database
+		const post = await Post.findById(postId);
+		console.log(post);
+		//3. Validate information
+		if (!post) {
+			return res.status(404).json({
+				success: false,
+				message: 'Post not found',
+			});
+		}
+		// 4. Save in database
+		const isLiked = post.like.indexOf(userId);
+
+		if (isLiked === -1) {
+			post.like.push(userId);
+		} else {
+			post.like.splice(isLiked, 1);
+		}
+		await post.save();
+
+		// 4. Response
+		res.status(200).json({
+			success: true,
+			message:
+				isLiked === -1
+					? 'Post added to favourites'
+					: 'Post removed from favourites',
+		});
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: ' ',
+			message: 'Error adding or deleting like from this post',
 			error: error.message,
 		});
 	}
