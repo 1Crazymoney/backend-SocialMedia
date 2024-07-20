@@ -202,13 +202,40 @@ export const getAllPosts = async (req, res) => {
 	}
 };
 
-//Get post by id
+//Get post by id (params)
 export const getPostById = async (req, res) => {
 	try {
+		//1. Get information
+		const postId = req.params.id;
+
+		//2. Validate information
+		const idPostValid = Types.ObjectId.isValid(postId);
+		if (!idPostValid){
+			res.status(400).json(
+				{
+					succes: false,
+					message: 'Id post is not valid'
+				}
+			)
+		}
+		//3. Find in database
+		const post = await Post.findOne({
+			_id: postId,
+		});
+
+		//4. Response
+		res.status(200).json(
+			{
+				succes: true,
+				message: 'Post retrieved successfully',
+				data: post
+			}
+		)
+
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: ' ',
+			message: 'Error retrieving post',
 			error: error.message,
 		});
 	}
