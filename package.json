@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "nodemon ./src/server.js",
+    "db:drop": "node ./src/scripts/dropDatabase.js",
+    "db:seed": "node ./src/scripts/seedDatabase.js",
+    "db:refresh": "npm run db:drop && npm run db:seed",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
