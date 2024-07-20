@@ -160,7 +160,7 @@ export const getMyPosts = async (req, res) => {
 				}
 			)
 		}
-		//4. response
+		//4. Response
 		res.status(200).json(
 			{
 				succes: true,
@@ -181,10 +181,22 @@ export const getMyPosts = async (req, res) => {
 //Get all posts
 export const getAllPosts = async (req, res) => {
 	try {
+		//1. Get information
+		const allPosts = await Post.find()
+
+		//2. Response
+		res.status(200).json(
+			{
+				succes: true,
+				message: 'All posts retrieved successfully',
+				data: allPosts
+			}
+		)
+
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			message: ' ',
+			message: 'Error retrieving posts',
 			error: error.message,
 		});
 	}
