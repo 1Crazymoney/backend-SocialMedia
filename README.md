@@ -59,9 +59,9 @@ The social network offers the following features:
 | DELETE | /api/posts/:id             | Delete post           | Token (user)|   N/A   |
 | PUT    | /api/posts                 | Update post           | Token (user)|{ "postId": "postIdToUpdate", "description": "newDescription, "image": "newURL_image"}      |
 | GET    | /api/posts/own             | Get own posts         | Token (user)|   N/A   |
-| GET    | /api/posts                 | Get all posts         | N/A (public)|   N/A   |
-| GET    | /api/posts/:id             | Get post by id        | N/A (public)|  N/A     |
-| GET    | /api/users/posts/:user_id  | Get posts by a user   | N/A (public)|  N/A     |
+| GET    | /api/posts                 | Get all posts         | Token (user)|   N/A   |
+| GET    | /api/posts/:id             | Get post by id        | Token (user)|  N/A     |
+| GET    | /api/posts/users/:user_id  | Get posts by a user   | Token (user)|  N/A     |
 
 ### 📝 Like
 | Method | URI                        | Action                | Auth          | Body |

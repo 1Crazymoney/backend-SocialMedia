@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { Types } from 'mongoose';
 import Post from './posts.model.js';
 import User from '../users/users.model.js';
@@ -241,13 +242,47 @@ export const getPostById = async (req, res) => {
 	}
 };
 
-//Get post by user
+//Get post by user (params)
 export const getPostByUser = async (req, res) => {
 	try {
+		// 1. Get information
+		const userId = req.params.user_id;
+
+		// 2. Validate information
+		if (!userId) {
+			return res.status(400).json({
+				success: false,
+				message: 'User id is required'
+			});
+		}
+		const userValid = mongoose.Types.ObjectId.isValid(userId)
+		if (!userValid) {
+			return res.status(400).json({
+				success: false,
+				message: 'Invalid user id'
+			});
+		}
+
+		// 3. Find in database
+		const userPosts = await Post.find({ user: userId });
+
+		if (userPosts.length === 0) {
+			return res.status(404).json({
+				success: false,
+				message: 'No posts found for this user'
+			});
+		}
+
+		// 4. Response
+		return res.status(200).json({
+			success: true,
+			message: 'User posts retrieved successfully',
+			data: userPosts
+		});
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			success: false,
-			message: ' ',
+			message: 'Error retrieving user posts',
 			error: error.message,
 		});
 	}
