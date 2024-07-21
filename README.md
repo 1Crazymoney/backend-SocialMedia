@@ -1,6 +1,16 @@
 # 🌐 Social Network Backend System
 
-This project aims to develop the backend system for a social network application. The system allows users to register, log in, and access various features such as sending messages, following other users, and managing their profiles. Users can also make their profiles private, write comments on posts, and like posts. Additionally, the system provides the option to deactivate or delete user accounts.
+This project is designed to develop the backend system for a dynamic social network application. The backend supports the following core functionalities:
+
+User Authentication: Users can register and log in to the application. Registration involves creating a new account with email and password, while logging in generates a token for authenticated access.
+
+User Management: Authenticated users can view and update their own profiles. Superadmins can view all users, and users can update their profiles with new details such as first name, last name, nickname, email, and password.
+
+Post Management: Users can create, update, and delete posts. Each post includes a description and an optional image. Users can view their own posts, all posts, or posts by other users. Additionally, users can like or unlike posts to express their preferences.
+
+Error Handling: The system includes comprehensive error handling to manage issues like invalid user credentials, missing required fields, and failed database operations.
+
+The system is built to facilitate a smooth user experience while ensuring robust data management and security.
 
 # 🦇 EMME
 <img alt="banner-emme" src="./img/banner-EMME.png">
