@@ -1,32 +1,24 @@
-# 🌐 Social Network Backend System
-
-This project is designed to develop the backend system for a dynamic social network application. The backend supports the following core functionalities:
-
-User Authentication: Users can register and log in to the application. Registration involves creating a new account with email and password, while logging in generates a token for authenticated access.
-
-User Management: Authenticated users can view and update their own profiles. Superadmins can view all users, and users can update their profiles with new details such as first name, last name, nickname, email, and password.
-
-Post Management: Users can create, update, and delete posts. Each post includes a description and an optional image. Users can view their own posts, all posts, or posts by other users. Additionally, users can like or unlike posts to express their preferences.
-
-Error Handling: The system includes comprehensive error handling to manage issues like invalid user credentials, missing required fields, and failed database operations.
-
-The system is built to facilitate a smooth user experience while ensuring robust data management and security.
-
 # 🦇 EMME
 <img alt="banner-emme" src="./img/banner-EMME.png">
 
 EMME is a revolutionary social network emerging from the shadows, inspired by the enigmatic and powerful figure of the bat. Much like the iconic Batman, EMME represents the duality between introspection and expression, providing a space where ideas can fly freely and connect people in innovative ways. Our violet color evokes the mystery and creativity of twilight, symbolizing an environment where each user can find their unique voice and share their vision with the world. With EMME, darkness becomes a canvas full of infinite possibilities, where wisdom and imagination come together to illuminate the path towards a more connected future.
 
+## 🌐 Social Network Backend System
+
+This project is designed to develop the backend system for a dynamic social network application.
+The system is built to facilitate a smooth user experience while ensuring robust data management and security.
+
 ## 🛠️ Features
 
 The social network offers the following features:
 
-- **User Registration and Login**: Users can register and log in to access the application.
-- **Messaging**: Users can send and receive messages.
-- **Profile Management**: Users can update their profiles, set privacy settings, and view other users' profiles.
-- **Following Users**: Users can follow other users to see their posts in their timeline.
-- **Comments and Likes**: Users can comment on and like posts.
-- **Account Deactivation and Deletion**: Users can deactivate their accounts or request deletion by a super admin.
+**User Authentication:** Users can register and log in to the application. Registration involves creating a new account with email and password, while logging in generates a token for authenticated access.
+
+**User Management:** Authenticated users can view and update their own profiles. Superadmins can view all users, and users can update their profiles with new details such as first name, last name, nickname, email, and password.
+
+**Post Management:** Users can create, update, and delete posts. Each post includes a description and an optional image. Users can view their own posts, all posts, or posts by other users. Additionally, users can like or unlike posts to express their preferences.
+
+**Error Handling:** The system includes comprehensive error handling to manage issues like invalid user credentials, missing required fields, and failed database operations.
 
 ## ⚙️ Stack
 
