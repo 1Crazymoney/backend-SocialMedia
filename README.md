@@ -2,7 +2,7 @@
 
 This project aims to develop the backend system for a social network application. The system allows users to register, log in, and access various features such as sending messages, following other users, and managing their profiles. Users can also make their profiles private, write comments on posts, and like posts. Additionally, the system provides the option to deactivate or delete user accounts.
 
-# EMME 🦇
+# 🦇 EMME
 <img alt="banner-emme" src="./img/banner-EMME.png>
 
 EMME is a revolutionary social network emerging from the shadows, inspired by the enigmatic and powerful figure of the bat. Much like the iconic Batman, EMME represents the duality between introspection and expression, providing a space where ideas can fly freely and connect people in innovative ways. Our violet color evokes the mystery and creativity of twilight, symbolizing an environment where each user can find their unique voice and share their vision with the world. With EMME, darkness becomes a canvas full of infinite possibilities, where wisdom and imagination come together to illuminate the path towards a more connected future.
@@ -42,7 +42,9 @@ The social network offers the following features:
 
 ## Deploy 🚀
 
-----
+<div align="center">
+    <a href="https://emme.zeabur.app"><strong> EMME social - Deploy - </strong></a>
+</div>
 
 ## 🗄️ Database Schema
 
@@ -77,3 +79,7 @@ The social network offers the following features:
 | GET    | /api/posts/:id             | Get post by id        | Token (user)|  N/A     |
 | GET    | /api/posts/users/:user_id  | Get posts by a user   | Token (user)|  N/A     |
 | PUT    | /api/posts/like/:id        | Like and unlike post  | Token (user)  |   N/A   |
+
+## 📞 Contact
+
+<a href=https://www.linkedin.com/in/morena-peralta-almada target="blank">![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)</a> <a href=https://www.github.com/More-Pe target="blank">![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)</a>
