@@ -290,12 +290,12 @@ export const likeOrNot = async (req, res) => {
 			});
 		}
 		// 4. Save in database
-		const isLiked = post.like.indexOf(userId);
+		const isLiked = post.likes.indexOf(userId);
 
 		if (isLiked === -1) {
-			post.like.push(userId);
+			post.likes.push(userId);
 		} else {
-			post.like.splice(isLiked, 1);
+			post.likes.splice(isLiked, 1);
 		}
 		await post.save();
 
