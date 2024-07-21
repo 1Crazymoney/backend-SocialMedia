@@ -3,7 +3,7 @@
 This project aims to develop the backend system for a social network application. The system allows users to register, log in, and access various features such as sending messages, following other users, and managing their profiles. Users can also make their profiles private, write comments on posts, and like posts. Additionally, the system provides the option to deactivate or delete user accounts.
 
 # 🦇 EMME
-<img alt="banner-emme" src="./img/banner-EMME.png>
+<img alt="banner-emme" src="./img/banner-EMME.png">
 
 EMME is a revolutionary social network emerging from the shadows, inspired by the enigmatic and powerful figure of the bat. Much like the iconic Batman, EMME represents the duality between introspection and expression, providing a space where ideas can fly freely and connect people in innovative ways. Our violet color evokes the mystery and creativity of twilight, symbolizing an environment where each user can find their unique voice and share their vision with the world. With EMME, darkness becomes a canvas full of infinite possibilities, where wisdom and imagination come together to illuminate the path towards a more connected future.
 
@@ -55,30 +55,28 @@ The social network offers the following features:
 ### 🔑 Authentication
 | Method | URI                    | Action           | Auth        | Body |
 |:--------:|:------------------------:|:------------------:|:-------------:|:------:|
-| POST   | /api/auth/register     | Register user    | N/A (public)|{ "email": "youremail@email.com",
-"password": "yourPassword" }    |
-| POST   | /api/auth/login        | Login user       | N/A (public)|{ "email": "youremail@email.com",
-"password": "yourPassword" }      |
+| POST   | /api/auth/register     | Register user    | N/A (public)|`{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }`    |
+| POST   | /api/auth/login        | Login user       | N/A (public)|`{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }`      |
 
 ### 👥 Users
 | Method | URI                   | Action              | Auth                | Body |
 |:--------:|:-----------------------:|:---------------------:|:---------------------:|:------:|
 | GET    | /api/users            | View all users      | Token (superadmin)  |   N/A   |
 | GET    | /api/users/profile    | View user profile   | Token (user)        |   N/A   |
-| PUT    | /api/users/profile    | Update user profile | Token (user)        |   {"first_name": "newFirstName",
-"last_name_ "newLastName", "nickname": "newNickName", "email": "newEmail", "password": "newPassword"}   |
+| PUT    | /api/users/profile    | Update user profile | Token (user)        |   `{"first_name": "newFirstName",`<br>`"last_name": "newLastName",`<br>`"nickname": "newNickName",`<br>`"email": "newEmail",`<br>`"password": "newPassword"}`   |
 
 ### 📝 Posts
 | Method | URI                        | Action                | Auth        | Body |
 |:--------:|:----------------------------:|:-----------------------:|:-------------:|:------:|
-| POST   | /api/posts                 | Create post           | Token (user)|{ "description": "description, "image": "URL_image"}      |
+| POST   | /api/posts                 | Create post           | Token (user)|`{ "description": "description",`<br>`"image": "URL_image"}`      |
 | DELETE | /api/posts/:id             | Delete post           | Token (user)|   N/A   |
-| PUT    | /api/posts                 | Update post           | Token (user)|{ "postId": "postIdToUpdate", "description": "newDescription, "image": "newURL_image"}      |
+| PUT    | /api/posts                 | Update post           | Token (user)|`{ "postId": "postIdToUpdate",`<br>`"description": "newDescription",`<br>`"image": "newURL_image"}`      |
 | GET    | /api/posts/own             | Get own posts         | Token (user)|   N/A   |
 | GET    | /api/posts                 | Get all posts         | Token (user)|   N/A   |
-| GET    | /api/posts/:id             | Get post by id        | Token (user)|  N/A     |
-| GET    | /api/posts/users/:user_id  | Get posts by a user   | Token (user)|  N/A     |
-| PUT    | /api/posts/like/:id        | Like and unlike post  | Token (user)  |   N/A   |
+| GET    | /api/posts/:id             | Get post by id        | Token (user)|   N/A     |
+| GET    | /api/posts/users/:user_id  | Get posts by a user   | Token (user)|   N/A     |
+| PUT    | /api/posts/like/:id        | Like and unlike post  | Token (user)|   N/A   |
+
 
 ## 📞 Contact
 
