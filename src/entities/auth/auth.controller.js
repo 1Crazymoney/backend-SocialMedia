@@ -20,7 +20,9 @@ export const register = async (req, res) => {
 		res.status(200).json({
 			success: true,
 			message: 'User registered successfully',
-			data: newUser,
+			data: {
+				userEmail: newUser.email
+			},
 		});
 	} catch (error) {
 		res.status(500).json({
