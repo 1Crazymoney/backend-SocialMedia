@@ -52,13 +52,11 @@ export const deletePost = async (req, res) => {
 		const postToDeleteValid = Types.ObjectId.isValid(postId);
 		const userId = req.tokenData.userId;
 
-		const postToDelete = await Post.findOne(
-			{
-				_id: postId,
-				user: userId
-			}
-		);
-		if(!postToDelete) {
+		const postToDelete = await Post.findOne({
+			_id: postId,
+			user: userId,
+		});
+		if (!postToDelete) {
 			return res.status(404).json({
 				succes: false,
 				message: 'You only can delete your own posts',
@@ -70,12 +68,11 @@ export const deletePost = async (req, res) => {
 				message: 'Post id not valid',
 			});
 		}
-		await Post.deleteOne(postToDelete)
+		await Post.deleteOne(postToDelete);
 		res.status(200).json({
 			success: true,
 			message: 'Post deleted successfully',
 		});
-	
 	} catch (error) {
 		res.status(500).json({
 			success: false,
@@ -300,10 +297,10 @@ export const likeOrNot = async (req, res) => {
 		// 4. Save in database
 		const isLiked = post.likes.indexOf(userId);
 
-		if (isLiked === -1) {
-			post.likes.push(userId);
-		} else {
+		if (isLiked !== -1) {
 			post.likes.splice(isLiked, 1);
+		} else {
+			post.likes.push(userId);
 		}
 		await post.save();
 
@@ -311,9 +308,9 @@ export const likeOrNot = async (req, res) => {
 		res.status(200).json({
 			success: true,
 			message:
-				isLiked === -1
-					? 'Post added to favourites'
-					: 'Post removed from favourites',
+				isLiked !== -1
+					? 'Post removed of favourites'
+					: 'Post added to favourites',
 		});
 	} catch (error) {
 		res.status(500).json({
