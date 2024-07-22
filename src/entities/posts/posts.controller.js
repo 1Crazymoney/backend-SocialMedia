@@ -50,24 +50,32 @@ export const deletePost = async (req, res) => {
 	try {
 		const postId = req.params.id;
 		const postToDeleteValid = Types.ObjectId.isValid(postId);
+		const userId = req.tokenData.userId;
 
-		const deletedPost = await Post.findByIdAndDelete(postId);
-		if (!deletedPost) {
+		const postToDelete = await Post.findOne(
+			{
+				_id: postId,
+				user: userId
+			}
+		);
+		if(!postToDelete) {
 			return res.status(404).json({
 				succes: false,
-				message: 'Post not found',
+				message: 'You only can delete your own posts',
 			});
 		}
 		if (!postToDeleteValid) {
 			res.status(400).json({
 				succes: false,
-				message: 'Id not valid',
+				message: 'Post id not valid',
 			});
 		}
+		await Post.deleteOne(postToDelete)
 		res.status(200).json({
 			success: true,
 			message: 'Post deleted successfully',
 		});
+	
 	} catch (error) {
 		res.status(500).json({
 			success: false,
