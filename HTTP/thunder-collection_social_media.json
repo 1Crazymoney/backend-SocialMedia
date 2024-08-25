@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "social_media",
     "collectionId": "6102134f-9a5c-450f-af15-e17a01ba6690",
-    "dateExported": "2024-07-21T09:54:35.204Z",
+    "dateExported": "2024-07-22T10:18:25.314Z",
     "version": "1.2",
     "folders": [
         {
@@ -37,11 +37,11 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-07-17T19:29:46.918Z",
-            "modified": "2024-07-17T20:08:32.532Z",
+            "modified": "2024-07-22T07:47:14.827Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\": \"prueba6@prueba.com\",\n  \"password\": \"123456789\"\n}",
+                "raw": "{\n  \"email\": \"tesfasfdsft@pruebaaaaa.com\",\n  \"password\": \"123456789\"\n}",
                 "form": []
             }
         },
@@ -54,11 +54,11 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2024-07-17T19:31:41.328Z",
-            "modified": "2024-07-20T17:03:48.564Z",
+            "modified": "2024-07-22T09:02:44.714Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\": \"morenaperaltaalmada@hola.com\",\n  \"password\": \"123456789\"\n}",
+                "raw": "{\n  \"email\": \"tesfasfdsft@pruebaaaaa.com\",\n  \"password\": \"123456789\"\n}",
                 "form": []
             }
         },
@@ -124,7 +124,7 @@
             "method": "POST",
             "sortNum": 60000,
             "created": "2024-07-20T13:43:17.776Z",
-            "modified": "2024-07-20T14:18:28.771Z",
+            "modified": "2024-07-22T09:03:03.844Z",
             "headers": [],
             "body": {
                 "type": "json",
@@ -133,7 +133,7 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njk4MWJkMjAxNDEzNTAzMmU5MGI1ZGEiLCJlbWFpbCI6InlvYW5hYmFuYW5hQGJhbmFuYTEiLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MjE0ODQzNDMsImV4cCI6MTcyMTQ5ODc0M30.Jh1lltxemMGCT1glYZagxEHtt3fpyaQKjKa0UsnvHcU"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjllMjAyNmU3YzIxZjU5MGFmNDEyMzQiLCJlbWFpbCI6InRlc2Zhc2Zkc2Z0QHBydWViYWFhYWEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjE2Mzg5NjQsImV4cCI6MTcyMTY1MzM2NH0.0t7ecE_byIyLmN9nNEiTL_MCA9eUoH_-i1RlggM-n-4"
             }
         },
         {
@@ -141,15 +141,15 @@
             "colId": "6102134f-9a5c-450f-af15-e17a01ba6690",
             "containerId": "f221e9da-0031-49cb-a46c-0fd86d750802",
             "name": "Delete post by id",
-            "url": "localhost:4000/api/posts/669bced19f0889cbd9b25ce5",
+            "url": "localhost:4000/api/posts/669c348c660d624a39a05744",
             "method": "DELETE",
             "sortNum": 70000,
             "created": "2024-07-20T14:56:13.283Z",
-            "modified": "2024-07-20T15:49:08.604Z",
+            "modified": "2024-07-22T09:09:58.093Z",
             "headers": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njk4MWJkMjAxNDEzNTAzMmU5MGI1ZGEiLCJlbWFpbCI6InlvYW5hYmFuYW5hQGJhbmFuYTEiLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MjE0ODQzNDMsImV4cCI6MTcyMTQ5ODc0M30.Jh1lltxemMGCT1glYZagxEHtt3fpyaQKjKa0UsnvHcU"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjllMjAyNmU3YzIxZjU5MGFmNDEyMzQiLCJlbWFpbCI6InRlc2Zhc2Zkc2Z0QHBydWViYWFhYWEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjE2Mzg5NjQsImV4cCI6MTcyMTY1MzM2NH0.0t7ecE_byIyLmN9nNEiTL_MCA9eUoH_-i1RlggM-n-4"
             }
         },
         {
@@ -241,18 +241,18 @@
             "_id": "396528c0-56f9-4430-bee3-1794f911ab99",
             "colId": "6102134f-9a5c-450f-af15-e17a01ba6690",
             "containerId": "f221e9da-0031-49cb-a46c-0fd86d750802",
-            "name": "Lik or dislike post by id",
-            "url": "localhost:4000/api/posts/like/669bcf0c90e2c05c8497ba7c",
+            "name": "Like or dislike post by id",
+            "url": "localhost:4000/api/posts/like/669c348c660d624a39a05738",
             "method": "PUT",
             "sortNum": 130000,
             "created": "2024-07-20T18:31:57.405Z",
-            "modified": "2024-07-20T18:34:16.884Z",
+            "modified": "2024-07-22T10:14:43.136Z",
             "headers": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njk4MWIyNTAxNDEzNTAzMmU5MGI1ZDgiLCJlbWFpbCI6Im1vcmVuYXBlcmFsdGFhbG1hZGFAaG9sYS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMTQ5NTAyOCwiZXhwIjoxNzIxNTA5NDI4fQ.qkVeqUMfZLgqmN3wqZ-hHtXSrERetbnX-0WyvqL_gwo"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjllMjAyNmU3YzIxZjU5MGFmNDEyMzQiLCJlbWFpbCI6InRlc2Zhc2Zkc2Z0QHBydWViYWFhYWEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjE2NDMyNTYsImV4cCI6MTcyMTY1NzY1Nn0.LZlYrrWXeIPCL8QJ9mrPFlCERkTI2DHiS3HwrUumUEM"
             }
         }
     ],
-    "ref": "WcNs8fDm5VrY0wW8N_VEMWcFSU8PzdxkDIQ9BtVuGmcJ7ug6OhuJdgrDgfiP93ojzJqWsof0eJ9gj1ANpBin4Q"
+    "ref": "WcNs8fDm5VrY0wW8N_VEMfDBWETJEv8yIv-uCWiMzRM-QpVvO21e1Y3VUGEKa5Rx0OEoiCtyUjDuZswc930TlA"
 }

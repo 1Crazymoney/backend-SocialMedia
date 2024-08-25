@@ -65,7 +65,8 @@ The social network offers the following features:
 |:--------:|:-----------------------:|:---------------------:|:---------------------:|:------:|
 | GET    | /api/users            | View all users      | Token (superadmin)  |   N/A   |
 | GET    | /api/users/profile    | View user profile   | Token (user)        |   N/A   |
-| PUT    | /api/users/profile    | Update user profile | Token (user)        |   `{"first_name": "newFirstName",`<br>`"last_name": "newLastName",`<br>`"nickname": "newNickName",`<br>`"email": "newEmail",`<br>`"password": "newPassword"}`   |
+| PUT    | /api/users/profile    | Update user profile | Token (user)        |  `{"first_name": "newFirstName",`<br>`"last_name": "newLastName",`<br>`"user_name": "newUserName",`<br>`"email": "newEmail",`<br>`"password": "newPassword",`<br>`"profilePicture": "newProfilePicture",`<br>`"coverPicture": "newCoverPicture",`<br>`"about": "newAbout"}`
+   |
 
 ### 📝 Posts
 | Method | URI                        | Action                | Auth        | Body |
