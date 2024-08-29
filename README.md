@@ -42,6 +42,10 @@ The social network offers the following features:
 6. If you want, execute the seeders:
 `$ npm run db:seed` or introduce the information manually.
 
+<div align="center">
+    <a href="https://github.com/More-Pe/frontend-SocialMedia"><strong> Click here to go to de Frontend repo! - </strong></a>
+</div>
+
 ## Deploy 🚀
 
 <div align="center">
@@ -61,12 +65,15 @@ The social network offers the following features:
 | POST   | /api/auth/login        | Login user       | N/A (public)|`{ "email": "youremail@email.com",`<br>`"password": "yourPassword" }`      |
 
 ### 👥 Users
-| Method | URI                   | Action              | Auth                | Body |
-|:--------:|:-----------------------:|:---------------------:|:---------------------:|:------:|
-| GET    | /api/users            | View all users      | Token (superadmin)  |   N/A   |
-| GET    | /api/users/profile    | View user profile   | Token (user)        |   N/A   |
-| PUT    | /api/users/profile    | Update user profile | Token (user)        |  `{"first_name": "newFirstName",`<br>`"last_name": "newLastName",`<br>`"user_name": "newUserName",`<br>`"email": "newEmail",`<br>`"password": "newPassword",`<br>`"profilePicture": "newProfilePicture",`<br>`"coverPicture": "newCoverPicture",`<br>`"about": "newAbout"}`
-   |
+| Method | URI                     | Action              | Auth                | Body |
+|:--------:|:-------------------------:|:---------------------:|:---------------------:|:------:|
+| GET    | /api/users              | View all users      | Token (superadmin)  |   N/A   |
+| GET    | /api/users/profile      | View user profile   | Token (user)        |   N/A   |
+| PUT    | /api/users/profile      | Update user profile | Token (user)        |  `{"first_name": "newFirstName",`<br>`"last_name": "newLastName",`<br>`"user_name": "newUserName",`<br>`"email": "newEmail",`<br>`"password": "newPassword",`<br>`"profilePicture": "newProfilePicture",`<br>`"coverPicture": "newCoverPicture",`<br>`"about": "newAbout"}` |
+| GET    | /api/users/followers | Get user followers   | Token (user)         |   N/A   |
+| POST   | /api/users/follow/:id    | Follow a user        | Token (user)         |   N/A   |
+| POST   | /api/users/unfollow/:id  | Unfollow a user      | Token (user)         |   N/A   |
+
 
 ### 📝 Posts
 | Method | URI                        | Action                | Auth        | Body |

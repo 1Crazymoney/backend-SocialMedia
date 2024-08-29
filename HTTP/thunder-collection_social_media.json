@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "social_media",
     "collectionId": "6102134f-9a5c-450f-af15-e17a01ba6690",
-    "dateExported": "2024-07-22T10:18:25.314Z",
+    "dateExported": "2024-08-29T11:05:28.534Z",
     "version": "1.2",
     "folders": [
         {
@@ -54,11 +54,11 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2024-07-17T19:31:41.328Z",
-            "modified": "2024-07-22T09:02:44.714Z",
+            "modified": "2024-08-29T10:55:53.894Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\": \"tesfasfdsft@pruebaaaaa.com\",\n  \"password\": \"123456789\"\n}",
+                "raw": "{\n    \"email\": \"soyadmin@admin.com\",\n    \"password\": \"123456789\"\n}",
                 "form": []
             }
         },
@@ -242,17 +242,65 @@
             "colId": "6102134f-9a5c-450f-af15-e17a01ba6690",
             "containerId": "f221e9da-0031-49cb-a46c-0fd86d750802",
             "name": "Like or dislike post by id",
-            "url": "localhost:4000/api/posts/like/669c348c660d624a39a05738",
+            "url": "localhost:4000/api/posts/like/669c348c660d624a39a05737",
             "method": "PUT",
             "sortNum": 130000,
             "created": "2024-07-20T18:31:57.405Z",
-            "modified": "2024-07-22T10:14:43.136Z",
+            "modified": "2024-07-22T10:41:22.092Z",
             "headers": [],
             "auth": {
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjllMjAyNmU3YzIxZjU5MGFmNDEyMzQiLCJlbWFpbCI6InRlc2Zhc2Zkc2Z0QHBydWViYWFhYWEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjE2NDMyNTYsImV4cCI6MTcyMTY1NzY1Nn0.LZlYrrWXeIPCL8QJ9mrPFlCERkTI2DHiS3HwrUumUEM"
             }
+        },
+        {
+            "_id": "4c8cdc44-7c30-4b0b-b676-83f85c3dcdae",
+            "colId": "6102134f-9a5c-450f-af15-e17a01ba6690",
+            "containerId": "518142e2-c82b-44eb-ba5a-60db5450ee91",
+            "name": "Get followers",
+            "url": "localhost:4000/api/users/followers",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2024-08-29T11:00:55.376Z",
+            "modified": "2024-08-29T11:01:19.444Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNkYzE2M2M1ZjlhNWExNzQzOGFjZTkiLCJlbWFpbCI6InNveWFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJzdXBlcl9hZG1pbiIsImlhdCI6MTcyNDkyODk1MywiZXhwIjoxNzI0OTQzMzUzfQ.Hq8no2UctMqcB6kLcsBoOlTqvCenDW9nbhVFM6mZHy0"
+            }
+        },
+        {
+            "_id": "bbd91458-fd5d-4e09-9fb3-0a45fa12aba5",
+            "colId": "6102134f-9a5c-450f-af15-e17a01ba6690",
+            "containerId": "518142e2-c82b-44eb-ba5a-60db5450ee91",
+            "name": "Follow a user",
+            "url": "localhost:4000/api/users/follow/66cb732aed4f8701c9083029",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2024-08-29T11:01:46.086Z",
+            "modified": "2024-08-29T11:04:40.230Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNkYzE2M2M1ZjlhNWExNzQzOGFjZTkiLCJlbWFpbCI6InNveWFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJzdXBlcl9hZG1pbiIsImlhdCI6MTcyNDkyODk1MywiZXhwIjoxNzI0OTQzMzUzfQ.Hq8no2UctMqcB6kLcsBoOlTqvCenDW9nbhVFM6mZHy0"
+            }
+        },
+        {
+            "_id": "f3c73fb7-9ac6-4fec-97dc-4d8f32038d62",
+            "colId": "6102134f-9a5c-450f-af15-e17a01ba6690",
+            "containerId": "518142e2-c82b-44eb-ba5a-60db5450ee91",
+            "name": "Unfollow a user",
+            "url": "localhost:4000/api/users/unfollow/66cb732aed4f8701c9083029",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2024-08-29T11:04:52.703Z",
+            "modified": "2024-08-29T11:05:17.288Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNkYzE2M2M1ZjlhNWExNzQzOGFjZTkiLCJlbWFpbCI6InNveWFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJzdXBlcl9hZG1pbiIsImlhdCI6MTcyNDkyODk1MywiZXhwIjoxNzI0OTQzMzUzfQ.Hq8no2UctMqcB6kLcsBoOlTqvCenDW9nbhVFM6mZHy0"
+            }
         }
     ],
-    "ref": "WcNs8fDm5VrY0wW8N_VEMfDBWETJEv8yIv-uCWiMzRM-QpVvO21e1Y3VUGEKa5Rx0OEoiCtyUjDuZswc930TlA"
+    "ref": "WcNs8fDm5VrY0wW8N_VEMVdvSyrpvkQe029tB_Hv9Fz-3O8HKjTyjtGYNXK9o4XncO-ABwVkOUgIrGEKXcW1LQ"
 }
