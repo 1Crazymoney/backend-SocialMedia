@@ -278,23 +278,20 @@ export const getPostsByUser = async (req, res) => {
 	}
 };
 
-//Like and dislike by post id (params)
+// controllers/posts.js
 export const likeOrNot = async (req, res) => {
 	try {
-		//1. Get information
 		const postId = req.params.id;
 		const userId = req.tokenData.userId;
-		//2. Find in database
+
 		const post = await Post.findById(postId);
-		console.log(post);
-		//3. Validate information
 		if (!post) {
 			return res.status(404).json({
 				success: false,
 				message: 'Post not found',
 			});
 		}
-		// 4. Save in database
+
 		const isLiked = post.likes.indexOf(userId);
 
 		if (isLiked !== -1) {
@@ -304,12 +301,11 @@ export const likeOrNot = async (req, res) => {
 		}
 		await post.save();
 
-		// 4. Response
 		res.status(200).json({
 			success: true,
 			message:
 				isLiked !== -1
-					? 'Post removed of favourites'
+					? 'Post removed from favourites'
 					: 'Post added to favourites',
 		});
 	} catch (error) {

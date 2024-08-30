@@ -43,7 +43,7 @@ The social network offers the following features:
 `$ npm run db:seed` or introduce the information manually.
 
 <div align="center">
-    <a href="https://github.com/More-Pe/frontend-SocialMedia"><strong> Click here to go to de Frontend repo! - </strong></a>
+    <a href="https://github.com/More-Pe/frontend-SocialMedia"><strong> Click here to go to de Frontend repo! </strong></a>
 </div>
 
 ## Deploy 🚀
