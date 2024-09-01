@@ -3,48 +3,46 @@ import { Types } from 'mongoose';
 import Post from './posts.model.js';
 import User from '../users/users.model.js';
 
-//Create new post
 export const createNewPost = async (req, res) => {
 	try {
-		const { description, image } = req.body;
-		const userId = req.tokenData.userId;
-		if (!description) {
-			console.log(2);
-			throw new Error('Description is required');
-		}
-		const newPost = await Post.create({
-			user: userId,
-			description: description,
-			image: image,
+	  const { description } = req.body;
+	  const image = req.file ? req.file.path : null;
+	  const userId = req.tokenData.userId;
+  
+	  if (!description) {
+		return res.status(400).json({
+		  success: false,
+		  message: 'Description is required',
 		});
-		const user = await User.findById(userId);
-		if (!user) {
-			throw new Error('User not found');
-		}
-		res.status(201).json({
-			success: true,
-			message: 'New post created succesfully',
-			data: {
-				userEmail: user.email,
-				post: newPost,
-			},
-		});
+	  }
+  
+	  const newPost = await Post.create({
+		user: userId,
+		description,
+		image,
+	  });
+  
+	  const user = await User.findById(userId);
+	  if (!user) {
+		throw new Error('User not found');
+	  }
+  
+	  res.status(201).json({
+		success: true,
+		message: 'New post created successfully',
+		data: {
+		  userEmail: user.email,
+		  post: newPost,
+		},
+	  });
 	} catch (error) {
-		if (error.message == 'Description is required') {
-			return res.status(400).json({
-				success: false,
-				message: 'Title and description are required',
-				error: error.message,
-			});
-		}
-		res.status(500).json({
-			success: false,
-			message: 'Error creating post',
-			error: error.message,
-		});
+	  res.status(500).json({
+		success: false,
+		message: 'Error creating post',
+		error: error.message,
+	  });
 	}
-};
-
+  };
 //Delete post by id (params)
 export const deletePost = async (req, res) => {
 	try {
@@ -177,26 +175,28 @@ export const getMyPosts = async (req, res) => {
 	}
 };
 
-//Get all posts
 export const getAllPosts = async (req, res) => {
 	try {
-		//1. Get information
-		const allPosts = await Post.find();
-
-		//2. Response
-		res.status(200).json({
-			succes: true,
-			message: 'All posts retrieved successfully',
-			data: allPosts,
-		});
+	  const allPosts = await Post.find()
+		.populate({
+		  path: 'user',
+		  select: 'first_name last_name user_name profilePicture',
+		})
+		.exec();
+  
+	  res.status(200).json({
+		success: true,
+		message: 'All posts retrieved successfully',
+		data: allPosts,
+	  });
 	} catch (error) {
-		res.status(500).json({
-			success: false,
-			message: 'Error retrieving posts',
-			error: error.message,
-		});
+	  res.status(500).json({
+		success: false,
+		message: 'Error retrieving posts',
+		error: error.message,
+	  });
 	}
-};
+  };
 
 //Get post by id (params)
 export const getPostById = async (req, res) => {
