@@ -43,10 +43,10 @@ export const createNewPost = async (req, res) => {
 	  });
 	}
   };
-//Delete post by id (params)
+//Delete post by id (params) USER
 export const deletePost = async (req, res) => {
 	try {
-		const postId = req.params.id;
+		const postId = req.params._id;
 		const postToDeleteValid = Types.ObjectId.isValid(postId);
 		const userId = req.tokenData.userId;
 
@@ -145,24 +145,28 @@ export const getMyPosts = async (req, res) => {
 	try {
 		//1. Get information
 		const userId = req.tokenData.userId;
-		//2. Find in database
-		const myPosts = await Post.find({ user: userId });
-		//3. Validate information
+
+		//2. Find posts in the database and populate the user field
+		const myPosts = await Post.find({ user: userId }).populate('user', 'first_name last_name user_name profilePicture');
+
+		//3. Validate userId and posts
 		if (!userId) {
-			res.status(404).json({
+			return res.status(404).json({
 				success: false,
 				message: 'User not found',
 			});
 		}
-		if (!myPosts) {
-			res.status(404).json({
+
+		if (!myPosts || myPosts.length === 0) {
+			return res.status(404).json({
 				success: false,
 				message: "You don't have any posts yet",
 			});
 		}
-		//4. Response
+
+		//4. Response with posts and populated user data
 		res.status(200).json({
-			succes: true,
+			success: true,
 			message: 'All your posts retrieved successfully',
 			data: myPosts,
 		});
@@ -174,6 +178,7 @@ export const getMyPosts = async (req, res) => {
 		});
 	}
 };
+
 
 export const getAllPosts = async (req, res) => {
 	try {
@@ -202,7 +207,7 @@ export const getAllPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
 	try {
 		//1. Get information
-		const postId = req.params.id;
+		const postId = req.params._id;
 
 		//2. Validate information
 		const idPostValid = Types.ObjectId.isValid(postId);
@@ -236,7 +241,7 @@ export const getPostById = async (req, res) => {
 export const getPostsByUser = async (req, res) => {
 	try {
 		// 1. Get information
-		const userId = req.params.user_id;
+		const userId = req.params._id;
 
 		// 2. Validate information
 		if (!userId) {
@@ -259,7 +264,7 @@ export const getPostsByUser = async (req, res) => {
 		if (userPosts.length === 0) {
 			return res.status(404).json({
 				success: false,
-				message: 'No posts found for this user',
+				message: 'Make your first post!',
 			});
 		}
 
@@ -281,7 +286,7 @@ export const getPostsByUser = async (req, res) => {
 
 export const likeOrNot = async (req, res) => {
 	try {
-		const postId = req.params.id;
+		const postId = req.params._id;
 		const userId = req.tokenData.userId;
 
 		const post = await Post.findById(postId);
@@ -320,7 +325,7 @@ export const likeOrNot = async (req, res) => {
 //ADMIN
 export const updatePostAdmin = async (req, res) => {
 	try {
-	  const postId = req.params.id;
+	  const postId = req.params._id;
 	  const { description, image } = req.body;
   
 	  const postToUpdateValid = Types.ObjectId.isValid(postId);
@@ -365,7 +370,7 @@ export const updatePostAdmin = async (req, res) => {
 
   export const deletePostAdmin = async (req, res) => {
 	try {
-	  const postId = req.params.id;
+	  const postId = req.params._id;
 	  const postToDeleteValid = Types.ObjectId.isValid(postId);
   
 	  if (!postToDeleteValid) {

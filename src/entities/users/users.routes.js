@@ -9,10 +9,10 @@ router.get('/', auth, isSuperAdmin, getAllUsers) //View all users (superadmin)
 router.get('/profile', auth, getUserProfile) //View users profile
 router.put('/profile', auth, updateUserProfile) //Update user profile
 router.get('/followers', auth, getFollowers); // Get followers of a user
-router.post('/follow/:id', auth, followUser); // Follow a user
-router.post('/unfollow/:id', auth, unfollowUser); // Unfollow a user
-router.put('/admin/:id', auth, isSuperAdmin, updateUserAdmin) //Update user ADMIN
+router.post('/follow/:_id', auth, followUser); // Follow a user
+router.post('/unfollow/:_id', auth, unfollowUser); // Unfollow a user
+router.put('/admin/:_id', auth, isSuperAdmin, updateUserAdmin) //Update user ADMIN
 router.delete('/admin/:_id', auth, isSuperAdmin, deleteUserAdmin) //Delete user ADMIN
-router.get('/:userId', auth, getUserById);
+router.get('/:_id', auth, getUserById);
 
 export { router }

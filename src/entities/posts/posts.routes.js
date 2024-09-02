@@ -44,21 +44,21 @@ router.get('/own', auth, getMyPosts);
 router.get('/', auth, getAllPosts);
 
 // Obtener un post por id
-router.get('/:id', auth, getPostById);
+router.get('/:_id', auth, getPostById);
 
 // Obtener los posts de un usuario específico
-router.get('/users/:user_id', auth, getPostsByUser);
+router.get('/users/:_id', auth, getPostsByUser);
 
 // Like y dislike de un post
-router.put('/like/:id', auth, likeOrNot);
+router.put('/like/:_id', auth, likeOrNot);
 
 // Actualizar post ADMIN
-router.put('/admin/:id', auth, isSuperAdmin, updatePostAdmin);
+router.put('/admin/:_id', auth, isSuperAdmin, updatePostAdmin);
+
+// Eliminar post por id USER
+router.delete('/:_id', auth, deletePost);
 
 // Eliminar post por id
-router.delete('/:id', auth, deletePost);
-
-// Eliminar post por id
-router.delete('/admin/:id', auth, isSuperAdmin, deletePostAdmin);
+router.delete('/admin/:_id', auth, isSuperAdmin, deletePostAdmin);
 
 export { router };

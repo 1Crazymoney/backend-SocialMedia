@@ -140,7 +140,7 @@ export const getFollowers = async (req, res) => {
 
 // Follow a User
 export const followUser = async (req, res) => {
-	const idToFollow = req.params.id;
+	const idToFollow = req.params._id;
 	const currentUserId = req.tokenData.userId;
 
 	if (currentUserId === idToFollow) {
@@ -165,7 +165,7 @@ export const followUser = async (req, res) => {
 
 // Unfollow a User
 export const unfollowUser = async (req, res) => {
-	const idToUnfollow = req.params.id;
+	const idToUnfollow = req.params._id;
 	const currentUserId = req.tokenData.userId;
 
 	if (currentUserId === idToUnfollow) {
@@ -192,7 +192,7 @@ export const unfollowUser = async (req, res) => {
 // Update User by Admin
 export const updateUserAdmin = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.params._id;
         const { email, first_name, last_name, role } = req.body;
         
         console.log('Received update request for user:', userId);
@@ -280,7 +280,7 @@ export const deleteUserAdmin = async (req, res) => {
 //---//
 export const getUserById = async (req, res) => {
 	try {
-	  const userId = req.params.userId; // Obtén el ID del usuario de los parámetros de la solicitud
+	  const userId = req.params._id;
   
 	  // Encuentra al usuario por ID
 	  const user = await User.findById(userId).select(
