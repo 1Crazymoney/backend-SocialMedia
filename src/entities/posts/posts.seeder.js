@@ -16,32 +16,32 @@ const seedPosts = async () => {
 		const posts = [
 			{
 				description: 'Hello world!',
-				image: 'https://freeimage.host/i/dXvBeyl',
+				image: 'https://i.postimg.cc/ZnHXKhj4/closeup-shot-airplane-wing-mountains.jpg',
 				user: userIds[0], // John Doe
 			},
 			{
 				description: 'I love coffee!',
-				image: 'https://freeimage.host/i/dXvBgn9',
+				image: 'https://i.postimg.cc/zXD92VXB/cup-coffee-with-heart-drawn-foam.jpg',
 				user: userIds[0], // John Doe
 			},
 			{
-				description: 'Just got back from an amazing trip!',
-				image: 'https://freeimage.host/i/dXvBNaf',
+				description: 'Just finished reading a great book!',
+				image: 'https://i.postimg.cc/9XY6BG2K/crop-woman-enjoying-reading-near-window.jpg',
 				user: userIds[1], // Jane Doe
 			},
 			{
 				description: 'New design project!',
-				image: 'https://freeimage.host/i/dXvB46u',
+				image: 'https://i.postimg.cc/sXynBNMX/still-life-graphic-design-studio.jpg',
 				user: userIds[2], // Bob Smith
 			},
 			{
-				description: 'Just finished reading a great book!',
-				image: 'https://freeimage.host/i/dXvBvu2',
+				description: 'Just got back from an amazing trip',
+				image: 'https://i.postimg.cc/fTH1GDJv/female-tourist-balcony-from.jpg',
 				user: userIds[3], // Alice Johnson
 			},
 			{
 				description: 'Check out my new profile picture!',
-				image: 'https://freeimage.host/i/dXOq73l',
+				image: 'https://i.postimg.cc/1XmYdjST/pikaso-texttoimage-35mm-film-photography-Fotopara-usar-como-foto-de-p.jpg',
 				user: userIds[3], // Alice Johnson
 			},
 		];

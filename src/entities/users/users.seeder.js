@@ -8,8 +8,8 @@ const users = [
     user_name: 'johndoe',
     email: 'johndoe@example.com',
     password: '123456789',
-    profilePicture: 'https://freeimage.host/i/dXOq0u9',
-    coverPicture: 'https://freeimage.host/i/dXOqMCb',
+    profilePicture: 'https://i.postimg.cc/prs1MJXd/pikaso-texttoimage-35mm-film-photography-Profile-picture-of-a-middlea.jpg',
+    coverPicture: 'https://i.postimg.cc/GpDNTDzM/pikaso-texttoimage-35mm-film-photography-Banner-showcasing-a-tranquil.jpg',
     about: 'Software engineer and coffee lover',
   },
   {
@@ -18,8 +18,8 @@ const users = [
     user_name: 'janedoe',
     email: 'janedoe@example.com',
     password: '123456789',
-    profilePicture: 'https://freeimage.host/i/dXOq1je',
-    coverPicture: 'https://freeimage.host/i/dXOqjaV',
+    profilePicture: 'https://i.postimg.cc/5NkkPgR7/pikaso-texttoimage-35mm-film-photography-Profile-picture-of-a-young-A.jpg',
+    coverPicture: 'https://i.postimg.cc/cL22Jh7g/pikaso-texttoimage-35mm-film-photography-Banner-depicting-a-vibrant-f.jpg',
     about: 'Marketing specialist and travel enthusiast',
   },
   {
@@ -28,8 +28,8 @@ const users = [
     user_name: 'bobsmith',
     email: 'bobsmith@example.com',
     password: '123456789',
-    profilePicture: 'https://freeimage.host/i/dXOqavS',
-    coverPicture: 'https://freeimage.host/i/dXOqh3Q',
+    profilePicture: 'https://i.postimg.cc/Nj9CZThg/pikaso-texttoimage-35mm-film-photography-Profile-picture-of-a-young-S.jpg',
+    coverPicture: 'https://i.postimg.cc/jjygSbdm/pikaso-texttoimage-Banner-para-usar-como-foto-de-portada-de-una-perso.jpg',
     about: 'Graphic designer and music lover',
   },
   {
@@ -38,8 +38,8 @@ const users = [
     user_name: 'alicejohnson',
     email: 'alicejohnson@example.com',
     password: '123456789',
-    profilePicture: 'https://freeimage.host/i/dXOq73l',
-    coverPicture: 'https://freeimage.host/i/dXOqw8B',
+    profilePicture: 'https://i.postimg.cc/1XmYdjST/pikaso-texttoimage-35mm-film-photography-Fotopara-usar-como-foto-de-p.jpg',
+    coverPicture: 'https://i.postimg.cc/9MtnJj6Z/pikaso-texttoimage-35mm-film-photography-Banner-showcasing-a-tranquil-1.jpg',
     about: 'Data scientist and bookworm',
   },
   {
