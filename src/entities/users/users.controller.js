@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 // Get all users
 export const getAllUsers = async (req, res) => {
 	try {
-		const users = await User.find().select('email role');
+		const users = await User.find().select('email first_name last_name role');
 		res.status(200).json({
 			success: true,
 			message: 'Users retrieved successfully',
@@ -193,13 +193,16 @@ export const unfollowUser = async (req, res) => {
 export const updateUserAdmin = async (req, res) => {
     try {
         const userId = req.params.id;
-        const { email, role } = req.body;
+        const { email, first_name, last_name, role } = req.body;
+        
+        console.log('Received update request for user:', userId);
+        console.log('Request body:', req.body);
 
         // Validación de datos
-        if (!email && !role) {
+        if (!email && !first_name && !last_name && !role) {
             return res.status(400).json({
                 success: false,
-                message: 'At least one field (email or role) is required for update',
+                message: 'At least one field (email, first_name, last_name, or role) is required for update',
             });
         }
 
@@ -214,9 +217,13 @@ export const updateUserAdmin = async (req, res) => {
 
         // Actualizar los campos proporcionados
         if (email) user.email = email;
+        if (first_name) user.first_name = first_name;
+        if (last_name) user.last_name = last_name;
         if (role) user.role = role;
 
         await user.save();
+
+        console.log('User updated successfully:', user);
 
         res.status(200).json({
             success: true,
@@ -224,6 +231,7 @@ export const updateUserAdmin = async (req, res) => {
             data: user,
         });
     } catch (error) {
+        console.error('Error updating user:', error);
         res.status(500).json({
             success: false,
             message: 'Error updating user',
@@ -231,6 +239,7 @@ export const updateUserAdmin = async (req, res) => {
         });
     }
 };
+
 
 // Delete User by Admin
 export const deleteUserAdmin = async (req, res) => {
@@ -261,3 +270,38 @@ export const deleteUserAdmin = async (req, res) => {
 		});
 	}
 };
+
+//---//
+export const getUserById = async (req, res) => {
+	try {
+	  const userId = req.params.userId; // Obtén el ID del usuario de los parámetros de la solicitud
+  
+	  // Encuentra al usuario por ID
+	  const user = await User.findById(userId).select(
+		'first_name last_name user_name email profilePicture coverPicture about followers following -_id'
+	  );
+  
+	  // Verifica si el usuario existe
+	  if (!user) {
+		return res.status(404).json({
+		  success: false,
+		  message: 'User not found',
+		});
+	  }
+  
+	  // Retorna la respuesta con el usuario encontrado
+	  res.status(200).json({
+		success: true,
+		message: 'User retrieved successfully',
+		data: user,
+	  });
+	} catch (error) {
+	  // Manejo de errores
+	  console.error('Error fetching user by ID:', error);
+	  res.status(500).json({
+		success: false,
+		message: 'Error retrieving user',
+		error: error.message,
+	  });
+	}
+  };
