@@ -278,7 +278,7 @@ export const getPostsByUser = async (req, res) => {
 	}
 };
 
-// controllers/posts.js
+
 export const likeOrNot = async (req, res) => {
 	try {
 		const postId = req.params.id;
@@ -316,3 +316,83 @@ export const likeOrNot = async (req, res) => {
 		});
 	}
 };
+
+//ADMIN
+export const updatePostAdmin = async (req, res) => {
+	try {
+	  const postId = req.params.id;
+	  const { description, image } = req.body;
+  
+	  const postToUpdateValid = Types.ObjectId.isValid(postId);
+  
+	  if (!postToUpdateValid) {
+		res.status(400).json({
+		  success: false,
+		  message: 'Post id not valid',
+		});
+	  }
+  
+	  const postToUpdate = await Post.findOne({ _id: postId });
+	  if (!postToUpdate) {
+		res.status(404).json({
+		  success: false,
+		  message: 'Post not found',
+		});
+	  }
+  
+	  if (description) {
+		postToUpdate.description = description;
+	  }
+	  if (image) {
+		postToUpdate.image = image;
+	  }
+  
+	  await postToUpdate.save();
+  
+	  res.status(200).json({
+		success: true,
+		message: 'Post updated successfully',
+		data: postToUpdate,
+	  });
+	} catch (error) {
+	  res.status(500).json({
+		success: false,
+		message: 'Error updating post',
+		error: error.message,
+	  });
+	}
+  };
+
+  export const deletePostAdmin = async (req, res) => {
+	try {
+	  const postId = req.params.id;
+	  const postToDeleteValid = Types.ObjectId.isValid(postId);
+  
+	  if (!postToDeleteValid) {
+		res.status(400).json({
+		  success: false,
+		  message: 'Post id not valid',
+		});
+	  }
+  
+	  const postToDelete = await Post.findOne({ _id: postId });
+	  if (!postToDelete) {
+		res.status(404).json({
+		  success: false,
+		  message: 'Post not found',
+		});
+	  }
+  
+	  await Post.deleteOne({ _id: postId });
+	  res.status(200).json({
+		success: true,
+		message: 'Post deleted successfully',
+	  });
+	} catch (error) {
+	  res.status(500).json({
+		success: false,
+		message: 'Error deleting post',
+		error: error.message,
+	  });
+	}
+  };

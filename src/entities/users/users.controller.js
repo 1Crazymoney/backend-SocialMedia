@@ -187,3 +187,77 @@ export const unfollowUser = async (req, res) => {
 		}
 	}
 };
+
+//ADMIN
+// Update User by Admin
+export const updateUserAdmin = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { email, role } = req.body;
+
+        // Validación de datos
+        if (!email && !role) {
+            return res.status(400).json({
+                success: false,
+                message: 'At least one field (email or role) is required for update',
+            });
+        }
+
+        // Buscar el usuario por ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+
+        // Actualizar los campos proporcionados
+        if (email) user.email = email;
+        if (role) user.role = role;
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'User updated successfully',
+            data: user,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error updating user',
+            error: error.message,
+        });
+    }
+};
+
+// Delete User by Admin
+export const deleteUserAdmin = async (req, res) => {
+	try {
+		const userId = req.params.userId;
+
+		// Find the user to delete
+		const user = await User.findById(userId);
+		if (!user) {
+			return res.status(404).json({
+				success: false,
+				message: 'User not found',
+			});
+		}
+
+		// Delete the user
+		await user.remove();
+
+		res.status(200).json({
+			success: true,
+			message: 'User deleted successfully',
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			message: 'Error deleting user',
+			error: error.message,
+		});
+	}
+};

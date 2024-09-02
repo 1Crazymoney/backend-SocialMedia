@@ -3,23 +3,26 @@ import multer from 'multer';
 import path from 'path';
 import { auth } from '../../middlewares/auth.js';
 import {
-  createNewPost,
-  deletePost,
-  updatePost,
-  getMyPosts,
-  getAllPosts,
-  getPostById,
-  getPostsByUser,
-  likeOrNot,
+	createNewPost,
+	deletePost,
+	updatePost,
+	getMyPosts,
+	getAllPosts,
+	getPostById,
+	getPostsByUser,
+	likeOrNot,
+	updatePostAdmin,
+	deletePostAdmin,
 } from './posts.controller.js';
+import { isSuperAdmin } from '../../middlewares/isSuperAdmin.js';
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
+	destination: (req, file, cb) => {
+		cb(null, 'uploads/');
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now() + path.extname(file.originalname));
+	},
 });
 
 const upload = multer({ storage });
@@ -30,9 +33,6 @@ router.post('/', auth, upload.single('image'), createNewPost);
 
 // Crear nuevo post
 router.post('/', auth, upload.single('image'), createNewPost);
-
-// Eliminar post por id
-router.delete('/:id', auth, deletePost);
 
 // Actualizar post
 router.put('/', auth, updatePost);
@@ -52,5 +52,13 @@ router.get('/users/:user_id', auth, getPostsByUser);
 // Like y dislike de un post
 router.put('/like/:id', auth, likeOrNot);
 
-export { router };
+// Actualizar post ADMIN
+router.put('/admin/:id', auth, isSuperAdmin, updatePostAdmin);
 
+// Eliminar post por id
+router.delete('/:id', auth, deletePost);
+
+// Eliminar post por id
+router.delete('/admin/:id', auth, isSuperAdmin, deletePostAdmin);
+
+export { router };
