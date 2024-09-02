@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 // Get all users
 export const getAllUsers = async (req, res) => {
 	try {
-		const users = await User.find().select('email first_name last_name role');
+		const users = await User.find().select('_id email first_name last_name role');
 		res.status(200).json({
 			success: true,
 			message: 'Users retrieved successfully',
@@ -243,32 +243,38 @@ export const updateUserAdmin = async (req, res) => {
 
 // Delete User by Admin
 export const deleteUserAdmin = async (req, res) => {
-	try {
-		const userId = req.params.userId;
+    try {
+        const userId = req.params._id;
 
-		// Find the user to delete
-		const user = await User.findById(userId);
-		if (!user) {
-			return res.status(404).json({
-				success: false,
-				message: 'User not found',
-			});
-		}
+        console.log('Attempting to delete user:', userId);
 
-		// Delete the user
-		await user.remove();
+        // Find the user to delete
+        const user = await User.findById(userId);
+        if (!user) {
+            console.log('User not found:', userId);
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
 
-		res.status(200).json({
-			success: true,
-			message: 'User deleted successfully',
-		});
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			message: 'Error deleting user',
-			error: error.message,
-		});
-	}
+        // Delete the user
+        await user.deleteOne();
+
+        console.log('User deleted successfully:', userId);
+
+        res.status(200).json({
+            success: true,
+            message: 'User deleted successfully',
+        });
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting user',
+            error: error.message,
+        });
+    }
 };
 
 //---//

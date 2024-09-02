@@ -12,7 +12,7 @@ router.get('/followers', auth, getFollowers); // Get followers of a user
 router.post('/follow/:id', auth, followUser); // Follow a user
 router.post('/unfollow/:id', auth, unfollowUser); // Unfollow a user
 router.put('/admin/:id', auth, isSuperAdmin, updateUserAdmin) //Update user ADMIN
-router.delete('/admin/:id', auth, isSuperAdmin, deleteUserAdmin) //Delete user ADMIN
+router.delete('/admin/:_id', auth, isSuperAdmin, deleteUserAdmin) //Delete user ADMIN
 router.get('/:userId', auth, getUserById);
 
 export { router }
