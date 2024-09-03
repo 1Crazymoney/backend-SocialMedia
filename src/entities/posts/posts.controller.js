@@ -82,7 +82,7 @@ export const deletePost = async (req, res) => {
 
 //Update post by id (params)
 export const updatePost = async (req, res) => {
-	const { postId } = req.params;
+	const postId = req.params._id;
 	const { description } = req.body;
   
 	try {
