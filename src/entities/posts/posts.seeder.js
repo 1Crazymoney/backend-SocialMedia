@@ -6,11 +6,10 @@ const seedPosts = async () => {
 		await mongoose.connect(process.env.MONGO_URI);
 
 		const userIds = [
-			new mongoose.Types.ObjectId('64e9a6f5f50d0707b1a0c25a'), // John Doe
-			new mongoose.Types.ObjectId('64e9a6f5f50d0707b1a0c25b'), // Jane Doe
-			new mongoose.Types.ObjectId('64e9a6f5f50d0707b1a0c25c'), // Bob Smith
-			new mongoose.Types.ObjectId('64e9a6f5f50d0707b1a0c25d'), // Alice Johnson
-			new mongoose.Types.ObjectId('64e9a6f5f50d0707b1a0c25e'),
+			new mongoose.Types.ObjectId('66d60de89adde2aa278340c3'), // John Doe
+			new mongoose.Types.ObjectId('66d60de89adde2aa278340c1'), // Jane Doe
+			new mongoose.Types.ObjectId('66d60de89adde2aa278340c5'), // Bob Smith
+			new mongoose.Types.ObjectId('66d60de89adde2aa278340cb'), // Alice Johnson
 		];
 
 		const posts = [

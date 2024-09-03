@@ -1,8 +1,19 @@
+import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import User from './users.model.js';
 
+const userIds = [
+  new mongoose.Types.ObjectId('66d60de89adde2aa278340c3'), // John Doe
+  new mongoose.Types.ObjectId('66d60de89adde2aa278340c1'), // Jane Doe
+  new mongoose.Types.ObjectId('66d60de89adde2aa278340c5'), // Bob Smith
+  new mongoose.Types.ObjectId('66d60de89adde2aa278340cb'), // Alice Johnson
+  new mongoose.Types.ObjectId(), // Default User (ID generado automáticamente)
+  new mongoose.Types.ObjectId(), // Admin User (ID generado automáticamente)
+];
+
 const users = [
   {
+    _id: userIds[0],  // Asigna el ID de John Doe
     first_name: 'John',
     last_name: 'Doe',
     user_name: 'johndoe',
@@ -13,6 +24,7 @@ const users = [
     about: 'Software engineer and coffee lover',
   },
   {
+    _id: userIds[1],  // Asigna el ID de Jane Doe
     first_name: 'Jane',
     last_name: 'Doe',
     user_name: 'janedoe',
@@ -23,6 +35,7 @@ const users = [
     about: 'Marketing specialist and travel enthusiast',
   },
   {
+    _id: userIds[2],  // Asigna el ID de Bob Smith
     first_name: 'Bob',
     last_name: 'Smith',
     user_name: 'bobsmith',
@@ -33,6 +46,7 @@ const users = [
     about: 'Graphic designer and music lover',
   },
   {
+    _id: userIds[3],  // Asigna el ID de Alice Johnson
     first_name: 'Alice',
     last_name: 'Johnson',
     user_name: 'alicejohnson',
@@ -43,19 +57,25 @@ const users = [
     about: 'Data scientist and bookworm',
   },
   {
+    _id: userIds[4],  // ID generado automáticamente para el Default User
     first_name: 'Default',
     last_name: 'User',
     user_name: 'defaultuser',
     email: 'user@user.com',
     password: '123456789',
+    profilePicture: 'https://i.postimg.cc/Qd5TWxG8/bat-logo.png',
+    coverPicture: 'https://i.postimg.cc/d0YTRPw8/banner-EMME.png',
     role: 'user',
   },
   {
+    _id: userIds[5],  // ID generado automáticamente para el Admin User
     first_name: 'Admin',
     last_name: 'User',
     user_name: 'adminuser',
     email: 'admin@admin.com',
     password: '123456789',
+    profilePicture: 'https://i.postimg.cc/Qd5TWxG8/bat-logo.png',
+    coverPicture: 'https://i.postimg.cc/d0YTRPw8/banner-EMME.png',
     role: 'super_admin',
   },
 ];
@@ -72,9 +92,6 @@ async function seedUsers() {
       return newUser.save();
     }));
 
-    // Obtener los IDs de todos los usuarios
-    const userIds = createdUsers.map(user => user._id);
-
     // Actualizar el campo followers y following de cada usuario
     await Promise.all(createdUsers.map(user => {
       return User.updateOne(
@@ -90,4 +107,5 @@ async function seedUsers() {
 }
 
 export default seedUsers;
+
 
