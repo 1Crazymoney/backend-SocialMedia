@@ -35,7 +35,7 @@ router.post('/', auth, upload.single('image'), createNewPost);
 router.post('/', auth, upload.single('image'), createNewPost);
 
 // Actualizar post
-router.put('/', auth, updatePost);
+router.put('/:_id', auth, updatePost);
 
 // Obtener los posts del usuario
 router.get('/own', auth, getMyPosts);

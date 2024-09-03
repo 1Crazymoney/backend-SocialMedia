@@ -80,65 +80,47 @@ export const deletePost = async (req, res) => {
 	}
 };
 
-//Update post by id (body)
+//Update post by id (params)
 export const updatePost = async (req, res) => {
+	const { postId } = req.params;
+	const { description } = req.body;
+  
 	try {
-		// 1. Get information
-		const userId = req.tokenData.userId;
-		const { postId, description, image } = req.body;
-
-		// 2. Validate information
-		if (!postId) {
-			throw new Error('postId is required');
-		}
-		if (!userId) {
-			return res.status(404).json({
-				success: false,
-				message: 'User not found',
-			});
-		}
-		const post = await Post.findOne({
-			_id: postId,
-			user: userId,
+	  // Validación básica
+	  if (!postId || !description) {
+		return res.status(400).json({
+		  success: false,
+		  message: 'Post ID and description are required',
 		});
-		if (!post) {
-			return res.status(404).json({
-				success: false,
-				message: 'Post not found',
-			});
-		}
-
-		// 3. Save in database
-		if (description) {
-			post.description = description;
-		}
-		if (image) {
-			post.image = image;
-		}
-
-		await post.save();
-
-		// 4. Response
-		res.status(200).json({
-			success: true,
-			message: 'Post updated successfully',
-			data: post,
+	  }
+  
+	  // Encuentra y actualiza el post
+	  const updatedPost = await Post.findByIdAndUpdate(
+		postId,
+		{ description },
+		{ new: true }
+	  );
+  
+	  if (!updatedPost) {
+		return res.status(404).json({
+		  success: false,
+		  message: 'Post not found',
 		});
+	  }
+  
+	  return res.status(200).json({
+		success: true,
+		message: 'Post updated successfully',
+		data: updatedPost,
+	  });
 	} catch (error) {
-		if (error.message === 'postId is required') {
-			return res.status(400).json({
-				success: false,
-				message: 'postId is required',
-				error: error.message,
-			});
-		}
-		res.status(500).json({
-			success: false,
-			message: 'Error updating post',
-			error: error.message,
-		});
+	  return res.status(500).json({
+		success: false,
+		message: 'Error updating post',
+		error: error.message,
+	  });
 	}
-};
+  };
 
 //Get my own posts
 export const getMyPosts = async (req, res) => {
@@ -170,6 +152,7 @@ export const getMyPosts = async (req, res) => {
 			message: 'All your posts retrieved successfully',
 			data: myPosts,
 		});
+		console.log('myPosts:', myPosts);
 	} catch (error) {
 		res.status(500).json({
 			success: false,
