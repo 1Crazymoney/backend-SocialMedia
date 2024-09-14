@@ -46,7 +46,7 @@ The social network offers the following features:
     <a href="https://github.com/More-Pe/frontend-SocialMedia"><strong> Click here to go to de Frontend repo! </strong></a>
 </div>
 
-## Deploy 🚀
+## 🚀 Deploy
 
 <div align="center">
     <a href="https://emme.zeabur.app"><strong> EMME social - Deploy - </strong></a>
